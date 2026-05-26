@@ -1,26 +1,223 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: #f7f5ef;
+  --bg-soft: #efece4;
+  --surface: #ffffff;
+  --surface-2: #f1eee6;
+  --line: #e3dfd3;
+  --line-2: #d4cfc1;
+  --fg: #14130f;
+  --fg-2: #4a4843;
+  --muted: #8a877f;
+  --muted-2: #b8b4a9;
+  --accent: oklch(0.72 0.2 145);
+  --accent-ink: #06160c;
+  --coral: oklch(0.62 0.18 25);
+  --gold: oklch(0.72 0.13 80);
+  --display: var(--font-display), ui-sans-serif, system-ui, sans-serif;
+  --mono: var(--font-mono), ui-monospace, "SFMono-Regular", monospace;
+  --density: 1;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-background: var(--bg);
+  --color-foreground: var(--fg);
+  --font-sans: var(--display);
+  --font-mono: var(--mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--fg);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  min-height: 100vh;
+  font-family: var(--display);
+  font-feature-settings: "ss01", "ss02";
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+.noscroll::-webkit-scrollbar {
+  display: none;
+}
+
+.noscroll {
+  scrollbar-width: none;
+}
+
+@keyframes turnup-pulse-ring {
+  0% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+
+  80% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+
+@keyframes turnup-scroll-x {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-33.333%);
+  }
+}
+
+@keyframes turnup-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes turnup-aurora-shift {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  100% {
+    transform: translate3d(0, -3%, 0) scale(1.04);
+  }
+}
+
+@media (max-width: 1100px) {
+  .turnup-hero-grid,
+  .turnup-feature-grid,
+  .turnup-organisers-grid,
+  .turnup-teaser-grid,
+  .turnup-faq-grid {
+    grid-template-columns: 1fr !important;
+    gap: 40px !important;
+  }
+
+  .turnup-phone-stage {
+    height: 520px !important;
+  }
+
+  .turnup-three-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .turnup-footer-grid {
+    grid-template-columns: 1.3fr 1fr 1fr !important;
+  }
+
+  .turnup-quotes-grid {
+    column-count: 2 !important;
+  }
+}
+
+@media (max-width: 900px) {
+  .turnup-nav-inner {
+    padding: 14px 20px !important;
+  }
+
+  .turnup-nav-links,
+  .turnup-nav-badges {
+    display: none !important;
+  }
+
+  .turnup-phone-stage {
+    height: 440px !important;
+  }
+
+  .turnup-phone-left {
+    left: 0 !important;
+    top: 4% !important;
+  }
+
+  .turnup-phone-right {
+    right: 0 !important;
+    top: 12% !important;
+  }
+
+  .turnup-organiser-metrics,
+  .turnup-footer-grid {
+    grid-template-columns: 1fr 1fr !important;
+  }
+}
+
+@media (max-width: 700px) {
+  .turnup-page section,
+  .turnup-page footer {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+
+  .turnup-hero-section {
+    padding-top: 40px !important;
+  }
+
+  .turnup-phone-stage {
+    height: 360px !important;
+  }
+
+  .turnup-phone {
+    width: min(250px, 78vw) !important;
+  }
+
+  .turnup-phone-left .turnup-phone {
+    width: min(220px, 68vw) !important;
+  }
+
+  .turnup-quotes-grid {
+    column-count: 1 !important;
+  }
+
+  .turnup-footer-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .turnup-footer-bottom {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+
+  .turnup-floating-card {
+    display: none !important;
+  }
 }
